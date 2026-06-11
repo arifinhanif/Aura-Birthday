@@ -208,6 +208,65 @@
     @media (max-width: 640px) {
       .watermark { display: none; }
     }
+
+    /* ════ SURPRISE OPENING SCREEN ════ */
+    #surprise-screen {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #EEF4FF;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 2rem; overflow: hidden;
+    }
+    .bubble {
+      position: absolute; border-radius: 50%;
+      background: rgba(144,188,245,0.18);
+      border: 1px solid rgba(144,188,245,0.35);
+      animation: float-up linear infinite;
+      pointer-events: none;
+    }
+    @keyframes float-up {
+      0%   { transform: translateY(110vh) scale(0.6); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.7; }
+      100% { transform: translateY(-20vh) scale(1.1); opacity: 0; }
+    }
+    @keyframes bounce-in {
+      0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+      60%  { transform: scale(1.15) rotate(4deg); opacity: 1; }
+      80%  { transform: scale(0.95) rotate(-2deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .cake-anim { animation: bounce-in 0.8s cubic-bezier(.36,.07,.19,.97) 0.3s both; }
+    @keyframes text-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .t1 { animation: text-up 0.7s ease 0.9s both; }
+    .t2 { animation: text-up 0.7s ease 1.2s both; }
+    .t3 { animation: text-up 0.7s ease 1.5s both; }
+    .t4 { animation: text-up 0.7s ease 1.8s both; }
+    .t5 { animation: text-up 0.7s ease 2.3s both; }
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.25; transform: scale(0.5); }
+    }
+    .star { animation: twinkle ease-in-out infinite; position: absolute; pointer-events: none; }
+    #open-btn {
+      background: #1B2A4A; color: #C8DEFF; border: none;
+      font-family: 'Lato', sans-serif; font-weight: 700;
+      font-size: 0.9rem; letter-spacing: 0.1em;
+      padding: 16px 40px; border-radius: 50px; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(27,42,74,0.18);
+    }
+    #open-btn:hover { background: #2E4273; transform: scale(1.05); }
+    #open-btn:active { transform: scale(0.98); }
+    @keyframes screen-exit {
+      0%   { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.06); }
+    }
+    #surprise-screen.closing { animation: screen-exit 0.65s ease forwards; pointer-events: none; }
+    #main-content { display: none; }
   </style>
 </head>
 
@@ -215,6 +274,63 @@
 
   <!-- Confetti canvas (fixed overlay) -->
   <canvas id="confetti-canvas"></canvas>
+
+  <!-- ════════════════════════════════════════
+       SURPRISE OPENING SCREEN
+  ════════════════════════════════════════ -->
+  <div id="surprise-screen">
+
+    <!-- Floating bubbles (rendered by JS) -->
+    <!-- Twinkling stars (rendered by JS) -->
+
+    <!-- Cake emoji -->
+    <div class="cake-anim" style="font-size:72px; line-height:1; margin-bottom:1.2rem;">🎂</div>
+
+    <!-- Main greeting -->
+    <h1 class="t1" style="font-family:'Playfair Display',serif; font-size:clamp(1.6rem,5vw,2.6rem); font-weight:700; color:#1B2A4A; margin-bottom:0.4rem; line-height:1.2;">
+      Selamat Ulang Tahun,
+    </h1>
+    <h1 class="t2" style="font-family:'Playfair Display',serif; font-size:clamp(1.8rem,6vw,3rem); font-weight:700; color:#2E4273; margin-bottom:1rem; line-height:1.2;">
+      Aura Helisya Renata! 🎉
+    </h1>
+
+    <!-- Age badge -->
+    <div class="t3" style="
+      display:inline-block;
+      background:#1B2A4A; color:#C8DEFF;
+      font-family:'Lato',sans-serif; font-weight:700;
+      font-size:0.85rem; letter-spacing:0.15em;
+      padding:6px 20px; border-radius:50px;
+      margin-bottom:1.4rem;
+    ">✨ 19 JUNI 2008 — 19 JUNI 2026 — 18 TAHUN ✨</div>
+
+    <!-- Poetic line -->
+    <p class="t4" style="
+      font-family:'EB Garamond',Georgia,serif;
+      font-style:italic; font-size:1.05rem;
+      color:#2E4273; max-width:420px;
+      line-height:1.8; margin-bottom:2rem;
+    ">
+      "Semoga hari ini dan seterusnya,<br/>
+      hanya hal-hal terbaik yang menghampirimu."
+    </p>
+
+    <!-- CTA button -->
+    <button id="open-btn" class="t5" onclick="openJournal()">
+      📖 &nbsp; Buka Jurnal Kejutanmu →
+    </button>
+
+    <!-- small note -->
+    <p class="t5" style="font-size:10px; color:#90BCF5; margin-top:1rem; font-family:'Lato',sans-serif; letter-spacing:0.05em;">
+      Ada sesuatu yang sudah disiapkan untukmu di dalam...
+    </p>
+
+  </div>
+
+  <!-- ════════════════════════════════════════
+       MAIN CONTENT (hidden until opened)
+  ════════════════════════════════════════ -->
+  <div id="main-content">
 
   <!-- ════════════════════════════════════════
        WRAPPER
@@ -725,7 +841,65 @@
       /* Scroll to message */
       setTimeout(() => msg.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
     }
+
+    /* ── Surprise screen: generate bubbles & stars ── */
+    (function() {
+      const screen = document.getElementById('surprise-screen');
+
+      /* Bubbles */
+      for (let i = 0; i < 18; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.random() * 60 + 20;
+        b.style.cssText = [
+          'width:'  + size + 'px',
+          'height:' + size + 'px',
+          'left:'   + Math.random() * 100 + 'vw',
+          'animation-duration:' + (Math.random() * 8 + 6) + 's',
+          'animation-delay:' + (Math.random() * 6) + 's',
+        ].join(';');
+        screen.appendChild(b);
+      }
+
+      /* Stars */
+      const starChars = ['✦','✧','⋆','✶','·'];
+      for (let i = 0; i < 22; i++) {
+        const s = document.createElement('span');
+        s.className = 'star';
+        s.textContent = starChars[Math.floor(Math.random() * starChars.length)];
+        s.style.cssText = [
+          'left:'   + Math.random() * 100 + 'vw',
+          'top:'    + Math.random() * 100 + 'vh',
+          'font-size:' + (Math.random() * 14 + 10) + 'px',
+          'color: #90BCF5',
+          'animation-duration:' + (Math.random() * 2 + 1.5) + 's',
+          'animation-delay:' + (Math.random() * 2) + 's',
+        ].join(';');
+        screen.appendChild(s);
+      }
+    })();
+
+    /* ── Open Journal ── */
+    function openJournal() {
+      const screen = document.getElementById('surprise-screen');
+      const main   = document.getElementById('main-content');
+
+      /* Fire confetti on open */
+      spawnConfetti();
+      animateConfetti();
+
+      /* Animate screen out */
+      screen.classList.add('closing');
+      setTimeout(() => {
+        screen.style.display = 'none';
+        main.style.display   = 'block';
+        /* Scroll to top */
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 650);
+    }
   </script>
+
+  </div><!-- end #main-content -->
 
   <!-- ════════════════════════════════════════
        MUSIC PLAYER — pojok kiri bawah
