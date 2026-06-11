@@ -905,9 +905,6 @@
        MUSIC PLAYER — pojok kiri bawah
   ════════════════════════════════════════ -->
 
-  <!-- YouTube IFrame API -->
-  <script src="https://www.youtube.com/iframe_api"></script>
-
   <!-- Hidden YouTube iframe container -->
   <div id="yt-container" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;overflow:hidden;">
     <div id="yt-player"></div>
@@ -1006,12 +1003,12 @@
     var isMuted    = false;
     var ytReady    = false;
 
-    /* Called automatically by YouTube API when ready */
-    function onYouTubeIframeAPIReady() {
+    /* Must use window. so YouTube API can find it after async load */
+    window.onYouTubeIframeAPIReady = function() {
       ytPlayer = new YT.Player('yt-player', {
         height: '1',
         width:  '1',
-        videoId: 'tHj2eNbm2ws',   /* Bertaut — Nadin Amizah */
+        videoId: 'tHj2eNbm2ws',
         playerVars: {
           autoplay:    0,
           controls:    0,
@@ -1019,24 +1016,47 @@
           playlist:    'tHj2eNbm2ws',
           rel:         0,
           modestbranding: 1,
+          origin:      window.location.origin,
         },
         events: {
           onReady:       onPlayerReady,
           onStateChange: onPlayerStateChange,
+          onError:       onPlayerError,
         }
       });
-    }
+    };
 
     function onPlayerReady(event) {
       ytReady = true;
       ytPlayer.setVolume(70);
+      /* Update button to show ready state */
+      document.getElementById('play-pause-btn').style.opacity = '1';
     }
 
     function onPlayerStateChange(event) {
-      /* If video ended (shouldn't happen with loop, but just in case) */
       if (event.data === YT.PlayerState.ENDED) {
         ytPlayer.playVideo();
       }
+      /* Sync UI if user somehow pauses externally */
+      if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        document.getElementById('icon-play').style.display  = 'none';
+        document.getElementById('icon-pause').style.display = 'block';
+        document.getElementById('music-art').classList.add('spinning');
+        document.getElementById('music-player').classList.add('playing');
+      }
+      if (event.data === YT.PlayerState.PAUSED) {
+        isPlaying = false;
+        document.getElementById('icon-play').style.display  = 'block';
+        document.getElementById('icon-pause').style.display = 'none';
+        document.getElementById('music-art').classList.remove('spinning');
+        document.getElementById('music-player').classList.remove('playing');
+      }
+    }
+
+    function onPlayerError(event) {
+      console.warn('YT Player error:', event.data);
+      document.getElementById('play-pause-btn').title = 'Error memuat lagu — cek koneksi internet';
     }
 
     /* ── Toggle Play/Pause ── */
@@ -1074,6 +1094,9 @@
       }
     }
   </script>
+
+  <!-- Load YouTube IFrame API LAST so window.onYouTubeIframeAPIReady is already defined -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 
 </body>
 </html>
