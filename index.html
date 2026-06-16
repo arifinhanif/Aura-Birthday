@@ -669,14 +669,15 @@
         const pBar = document.getElementById('p-bar');
         const playBtn = document.getElementById('play-pause-btn');
 
-        // Ganti timeline detik & teks ini sesuai lagu pilihanmu (Contoh di bawah memakai aransemen imajiner)
-        const TaylorLyrics = [
-            { time: 0, text: "🎵 Membuka Soundscape Rahasia untuk Aura..." },
-            { time: 5, text: "✨ 'Take me to the lakes where all the poets went to die'..." },
-            { time: 12, text: "🍂 'I don't belong, and my beloved, neither do we'..." },
-            { time: 20, text: "🌌 'You are in love, true love'..." },
-            { time: 30, text: "💫 Di antara konstelasi semesta, kamu adalah melodi terindah." }
-        ];
+ // Timeline Lirik Pas dengan Lagu Sampai Jadi Debu
+const TaylorLyrics = [
+    { time: 0, text: "🎵 Membuka Soundscape Rahasia untuk Aura..." },
+    { time: 10, text: "✨ 'Badai tuan telah berlalu'..." },
+    { time: 15, text: "🍂 'Salahkah ku menuntut mesra?'" },
+    { time: 22, text: "🌌 'Tiap taufan menyerang kau di sampingku'..." },
+    { time: 30, text: "💫 'Kau aman ada bersamaku'..." },
+    { time: 42, text: "👩‍❤️‍👨 'Selamanya... sampai jadi debu.'" }
+];
 
         function toggleAudio() {
             if(audio.paused) {
