@@ -1,36 +1,83 @@
-/* ===================================
-   AURA WEBSITE SCRIPT
-=================================== */
+/* =====================================
+   AURA WEBSITE JAVASCRIPT
+   BASE64 VERSION
+===================================== */
+
+
+/* ==========================
+   BASE64 ASSET
+========================== */
+
+
+const IMG = {
+
+
+IMG1:
+"data:image/jpeg;base64,PASTE_BASE64_FOTO_1_DISINI",
+
+
+IMG2:
+"data:image/jpeg;base64,PASTE_BASE64_FOTO_2_DISINI",
+
+
+IMG3:
+"data:image/jpeg;base64,PASTE_BASE64_FOTO_3_DISINI",
+
+
+COVER:
+"data:image/jpeg;base64,PASTE_BASE64_COVER_DISINI"
 
 
 
-/* =========================
-   PASSWORD SYSTEM
-========================= */
+};
+
+
+
+
+
+const MUSIC =
+
+"data:audio/mp3;base64,PASTE_BASE64_AUDIO_DISINI";
+
+
+
+
+
+
+
+/* ==========================
+ PASSWORD
+========================== */
 
 
 const PASSWORD = "01072025";
 
 
 
+
 function checkPassword(){
 
 
-const input =
-document.getElementById(
+const value =
+
+document
+.getElementById(
 "passwordInput"
-).value;
+)
+.value;
 
 
 
-const message =
-document.getElementById(
+const wrong =
+
+document
+.getElementById(
 "wrongPass"
 );
 
 
 
-if(input === PASSWORD){
+if(value === PASSWORD){
 
 
 document
@@ -38,6 +85,7 @@ document
 "lock-screen"
 )
 .style.display="none";
+
 
 
 document
@@ -49,7 +97,13 @@ document
 );
 
 
-startStars();
+
+createStars();
+
+
+
+loadAssets();
+
 
 
 }
@@ -57,7 +111,7 @@ startStars();
 else{
 
 
-message.innerHTML =
+wrong.innerHTML =
 "Password salah ✦";
 
 
@@ -72,63 +126,118 @@ message.innerHTML =
 
 
 
-/* =========================
-   STAR ANIMATION
-========================= */
+
+/* ==========================
+ LOAD BASE64
+========================== */
 
 
-function startStars(){
+function loadAssets(){
 
 
-const container =
-document.getElementById(
+document
+.getElementById(
+"img1"
+)
+.src = IMG.IMG1;
+
+
+
+document
+.getElementById(
+"img2"
+)
+.src = IMG.IMG2;
+
+
+
+document
+.getElementById(
+"img3"
+)
+.src = IMG.IMG3;
+
+
+
+document
+.getElementById(
+"cover"
+)
+.src = IMG.COVER;
+
+
+
+document
+.getElementById(
+"audio"
+)
+.src = MUSIC;
+
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+ STAR EFFECT
+========================== */
+
+
+function createStars(){
+
+
+const area =
+
+document
+.getElementById(
 "stars"
 );
 
 
 
-for(let i=0;i<120;i++){
+for(let i=0;i<150;i++){
 
 
-const star =
+let star =
 document.createElement(
 "div"
 );
 
 
 
-star.className="star";
+star.className =
+"star";
 
 
 
 star.style.left =
+
 Math.random()*100+"%";
 
 
 
 star.style.top =
+
 Math.random()*100+"%";
 
 
 
 star.style.animationDelay =
-Math.random()*3+"s";
+
+Math.random()*5+"s";
 
 
 
-star.style.opacity =
-Math.random();
-
-
-
-container.appendChild(
-star
-);
+area.appendChild(star);
 
 
 
 }
-
 
 
 }
@@ -136,9 +245,12 @@ star
 
 
 
-/* =========================
-   MODAL
-========================= */
+
+
+
+/* ==========================
+ MODAL
+========================== */
 
 
 function openModal(){
@@ -148,7 +260,8 @@ document
 .getElementById(
 "modal"
 )
-.style.display="flex";
+.style.display =
+"flex";
 
 
 }
@@ -162,7 +275,8 @@ document
 .getElementById(
 "modal"
 )
-.style.display="none";
+.style.display =
+"none";
 
 
 }
@@ -172,16 +286,10 @@ document
 
 
 
-/* =========================
-   MUSIC PLAYER
-========================= */
 
-
-const audio =
-document.getElementById(
-"audio"
-);
-
+/* ==========================
+ MUSIC PLAYER
+========================== */
 
 
 let playing=false;
@@ -191,9 +299,12 @@ let playing=false;
 function toggleMusic(){
 
 
-const button =
-document.querySelector(
-"#music-player button"
+
+const audio =
+
+document
+.getElementById(
+"audio"
 );
 
 
@@ -204,10 +315,9 @@ if(!playing){
 audio.play();
 
 
+
 playing=true;
 
-
-button.innerHTML="⏸";
 
 
 }
@@ -218,106 +328,137 @@ else{
 audio.pause();
 
 
+
 playing=false;
 
 
-button.innerHTML="▶";
+
+}
 
 
 }
 
 
 
-}
 
 
 
 
 
-
-/* =========================
-   SMOOTH SCROLL
-========================= */
-
-
-document
-.querySelectorAll(
-"button"
-)
-.forEach(btn=>{
+/* ==========================
+ CANVAS CONSTELLATION
+========================== */
 
 
-btn.addEventListener(
-"click",
-()=>{
-
-
-btn.style.transform=
-"scale(.95)";
-
-
-setTimeout(()=>{
-
-
-btn.style.transform="";
-
-
-},150);
-
-
-
-});
-
-
-});
-
-
-
-
-
-
-/* =========================
-   PHOTO FALLBACK
-========================= */
-
-
-document
-.querySelectorAll(
-".gallery img"
-)
-.forEach(img=>{
-
-
-img.onerror=function(){
-
-
-this.src =
-"https://picsum.photos/600/800";
-
-
-};
-
-
-
-});
-
-
-
-
-
-/* =========================
-   AUTO INIT
-========================= */
-
-
-window.onload=function(){
-
+const canvas =
 
 document
 .getElementById(
-"stars"
-)
-.innerHTML="";
+"canvas"
+);
 
 
-};
+
+if(canvas){
+
+
+const ctx =
+canvas.getContext(
+"2d"
+);
+
+
+
+canvas.width =
+window.innerWidth;
+
+
+
+canvas.height =
+400;
+
+
+
+let stars=[];
+
+
+
+for(let i=0;i<80;i++){
+
+
+stars.push({
+
+x:
+Math.random()*canvas.width,
+
+
+y:
+Math.random()*canvas.height,
+
+
+r:
+Math.random()*2
+
+
+});
+
+
+}
+
+
+
+
+function animate(){
+
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+
+ctx.fillStyle="white";
+
+
+
+stars.forEach(s=>{
+
+
+ctx.beginPath();
+
+
+ctx.arc(
+s.x,
+s.y,
+s.r,
+0,
+Math.PI*2
+);
+
+
+ctx.fill();
+
+
+
+});
+
+
+
+requestAnimationFrame(
+animate
+);
+
+
+
+}
+
+
+
+animate();
+
+
+
+}
