@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aura Helisya Renata</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- BACKGROUND EFFECT -->
+<div id="stars"></div>
+
+
+<!-- PASSWORD SCREEN -->
+<section id="lock-screen">
+
+    <div class="lock-box">
+
+        <h1>A Little Universe</h1>
+
+        <p>
+            Sebuah halaman kecil yang dibuat khusus untuk seseorang yang spesial.
+        </p>
+
+
+        <input 
+        type="password" 
+        id="passwordInput"
+        placeholder="Masukkan password">
+
+
+        <button onclick="checkPassword()">
+            Enter ✦
+        </button>
+
+
+        <p id="wrongPass"></p>
+
+    </div>
+
+</section>
+
+
+
+<!-- MAIN WEBSITE -->
+
+<main id="main-content" class="hidden">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>
+Aura Helisya Renata
+</h1>
+
+<p>
+18 tahun yang indah · 19 Juni 2008
+</p>
+
+
+<button onclick="openModal()">
+✦ One Last Thing... ✦
+</button>
+
+
+</section>
+
+
+
+<!-- MEMORY SECTION -->
+
+<section id="memory">
+
+<h2>
+Our Little Memories
+</h2>
+
+
+<div class="gallery">
+
+<img src="assets/images/photo1.jpg">
+
+<img src="assets/images/photo2.jpg">
+
+<img src="assets/images/photo3.jpg">
+
+</div>
+
+
+</section>
+
+
+
+
+<!-- LETTER -->
+
+<section id="letter">
+
+<h2>
+A Letter
+</h2>
+
+
+<div class="letter-box">
+
+<p>
+Selamat ulang tahun ke-18.
+</p>
+
+
+<p>
+Semoga hidupmu selalu dipenuhi hal baik,
+kebahagiaan, dan mimpi yang tercapai.
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- MUSIC PLAYER -->
+
+<div id="music-player">
+
+
+<button onclick="toggleMusic()">
+▶
+</button>
+
+
+<div>
+
+<p id="music-title">
+Sampai Jadi Debu
+</p>
+
+
+<p>
+Banda Neira
+</p>
+
+</div>
+
+
+<audio id="audio">
+<source src="assets/audio/music.mp3">
+</audio>
+
+
+</div>
+
+
+
+
+
+
+<!-- MODAL -->
+
+<div id="modal">
+
+
+<div class="modal-content">
+
+
+<button onclick="closeModal()">
+✕
+</button>
+
+
+<h2>
+Happy 18th, Aura 🎂
+</h2>
+
+
+<p>
+Ini bukan hanya website.
+</p>
+
+
+<p>
+Ini adalah cara seseorang mengatakan bahwa kamu sangat berarti.
+</p>
+
+
+<p>
+Semoga kamu selalu bahagia.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<footer>
+
+<div>
+Aura Helisya Renata
+</div>
+
+
+<div>
+Made with 💙 · A Little Universe Just For Her · 2026
+</div>
+
+
+</footer>
+
+
+
+</main>
+
+
+
+
+<script src="js/script.js"></script>
+
+
+</body>
+</html>
