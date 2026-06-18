@@ -1,124 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Aura Helisya Renata</title>
 
+
 <link rel="stylesheet" href="css/style.css">
+
 
 </head>
 
+
 <body>
 
-<!-- BACKGROUND EFFECT -->
+
 <div id="stars"></div>
 
 
+<div id="particles"></div>
+
+
+
 <!-- PASSWORD SCREEN -->
-<section id="lock-screen">
 
-    <div class="lock-box">
+<div id="lock-screen">
 
-        <h1>A Little Universe</h1>
-
-        <p>
-            Sebuah halaman kecil yang dibuat khusus untuk seseorang yang spesial.
-        </p>
+<div class="lock-container">
 
 
-        <input 
-        type="password" 
-        id="passwordInput"
-        placeholder="Masukkan password">
+<h1>
+A Little Universe
+</h1>
 
 
-        <button onclick="checkPassword()">
-            Enter ✦
-        </button>
+<p>
+A private universe created for someone special
+</p>
 
 
-        <p id="wrongPass"></p>
 
-    </div>
+<input 
+type="password"
+id="passwordInput"
+placeholder="Enter password">
 
-</section>
+
+<button onclick="checkPassword()">
+Enter ✦
+</button>
+
+
+<p id="wrongPass"></p>
+
+
+</div>
+
+</div>
+
+
 
 
 
 <!-- MAIN WEBSITE -->
 
-<main id="main-content" class="hidden">
+<div id="main-content" class="hidden">
 
 
-<!-- HERO -->
+<header class="hero">
 
-<section class="hero">
 
 <h1>
 Aura Helisya Renata
 </h1>
 
+
 <p>
-18 tahun yang indah · 19 Juni 2008
+A little universe for your special day
 </p>
 
 
+
 <button onclick="openModal()">
-✦ One Last Thing... ✦
+
+One Last Thing...
+
 </button>
 
 
-</section>
+
+</header>
 
 
 
-<!-- MEMORY SECTION -->
+
 
 <section id="memory">
 
+
 <h2>
-Our Little Memories
+Our Memories
 </h2>
 
 
 <div class="gallery">
 
-<img src="assets/images/photo1.jpg">
 
-<img src="assets/images/photo2.jpg">
+<img id="img1">
 
-<img src="assets/images/photo3.jpg">
+<img id="img2">
+
+<img id="img3">
+
 
 </div>
 
 
 </section>
 
-
-
-
-<!-- LETTER -->
+<!-- LETTER SECTION -->
 
 <section id="letter">
 
+
 <h2>
-A Letter
+A Letter For You
 </h2>
 
 
-<div class="letter-box">
+
+<div class="letter-container">
+
 
 <p>
-Selamat ulang tahun ke-18.
+Dear Aura,
 </p>
 
 
 <p>
-Semoga hidupmu selalu dipenuhi hal baik,
-kebahagiaan, dan mimpi yang tercapai.
+Terima kasih sudah menjadi seseorang yang
+memberikan warna dalam perjalanan ini.
 </p>
+
+
+
+<p>
+Semoga setiap langkahmu selalu dipenuhi
+kebahagiaan, keberanian, dan hal-hal baik.
+</p>
+
+
+
+<p>
+Happy 18th Birthday ✦
+</p>
+
 
 
 </div>
@@ -130,36 +169,113 @@ kebahagiaan, dan mimpi yang tercapai.
 
 
 
-<!-- MUSIC PLAYER -->
+
+
+<!-- CONSTELLATION -->
+
+<section id="constellation">
+
+
+<h2>
+Your Little Universe
+</h2>
+
+
+
+<canvas id="canvas"></canvas>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- MUSIC -->
 
 <div id="music-player">
 
 
-<button onclick="toggleMusic()">
-▶
-</button>
+<div class="music-cover">
 
 
-<div>
+<img id="cover">
 
-<p id="music-title">
+
+</div>
+
+
+
+<div class="music-info">
+
+
+<h3>
 Sampai Jadi Debu
-</p>
+</h3>
 
 
 <p>
 Banda Neira
 </p>
 
+
+</div>
+
+
+
+<button onclick="toggleMusic()">
+
+▶
+
+</button>
+
+
+
+<audio id="audio"></audio>
+
+
 </div>
 
 
-<audio id="audio">
-<source src="assets/audio/music.mp3">
-</audio>
+
+
+
+
+
+
+<!-- FINAL MESSAGE -->
+
+<section id="final-message">
+
+
+<h2>
+One Last Message
+</h2>
+
+
+
+<div class="final-card">
+
+
+<p>
+
+Kalau suatu hari kamu melihat ini lagi,
+semoga kamu ingat bahwa pernah ada seseorang
+yang berharap kamu selalu bahagia.
+
+</p>
+
 
 
 </div>
+
+
+
+</section>
+
 
 
 
@@ -171,38 +287,42 @@ Banda Neira
 <div id="modal">
 
 
+
 <div class="modal-content">
 
 
+
 <button onclick="closeModal()">
-✕
+
+×
+
 </button>
 
 
+
+
 <h2>
-Happy 18th, Aura 🎂
+
+Happy Birthday Aura 🎂
+
 </h2>
 
 
-<p>
-Ini bukan hanya website.
-</p>
-
 
 <p>
-Ini adalah cara seseorang mengatakan bahwa kamu sangat berarti.
+
+Sebuah halaman kecil,
+untuk seseorang yang spesial.
+
 </p>
 
-
-<p>
-Semoga kamu selalu bahagia.
-</p>
 
 
 </div>
 
 
 </div>
+
 
 
 
@@ -210,22 +330,30 @@ Semoga kamu selalu bahagia.
 
 <footer>
 
-<div>
-Aura Helisya Renata
-</div>
+
+<p>
+
+Made with 💙
+
+</p>
 
 
-<div>
-Made with 💙 · A Little Universe Just For Her · 2026
-</div>
+
+<p>
+
+A Little Universe Just For You
+
+</p>
+
 
 
 </footer>
 
 
 
-</main>
 
+
+</div>
 
 
 
@@ -233,4 +361,6 @@ Made with 💙 · A Little Universe Just For Her · 2026
 
 
 </body>
+
+
 </html>
